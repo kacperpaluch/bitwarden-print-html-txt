@@ -685,7 +685,8 @@
     exportTxtBtn.addEventListener('click', exportToTxt);
     exportHtmlBtn.addEventListener('click', exportToHtml);
     settingsToggle.addEventListener('click', () => {
-      printSettings.style.display = printSettings.style.display === 'none' ? 'block' : 'none';
+      const isHidden = window.getComputedStyle(printSettings).display === 'none';
+      printSettings.style.display = isHidden ? 'block' : 'none';
     });
     
     // Handle file upload
