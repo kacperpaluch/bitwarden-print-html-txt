@@ -49,7 +49,7 @@ Please choose the file corresponding to your preferred language.
     *   Open it in your preferred web browser (e.g., Chrome, Firefox, Edge, Safari).
 
 3.  **Load the JSON File:**
-    *   Drag the downloaded `*.json` file onto the designated area ("Przeciągnij plik JSON..." / "Drag JSON file here...") or click the "Wybierz plik JSON" / "Select JSON file" button and locate the file on your disk.
+    *   Drag the downloaded `*.json` file onto the designated area ("Drag JSON file here...") or click the "Select JSON file" button and locate the file on your disk.
 
 4.  **Filter and Select Items:**
     *   On the left side, lists of folders and item types will appear. Select those you are interested in.
@@ -57,13 +57,13 @@ Please choose the file corresponding to your preferred language.
     *   Selected items will appear in the "Podgląd wydruku" / "Print Preview" section.
 
 5.  **Adjust Print Settings (Optional):**
-    *   Click the <i class="fas fa-cog"></i> "Ustawienia wydruku" / "Print Settings" icon below the preview header.
-    *   Check the "Drukuj każdy element na osobnej stronie" / "Print each item on a separate page" option if you want each entry to start on a new page.
+    *   Click the <i class="fas fa-cog"></i> "Print Settings" icon below the preview header.
+    *   Check the "Print each item on a separate page" option if you want each entry to start on a new page.
 
 6.  **Print or Export:**
-    *   **Print:** Click the <i class="fas fa-print"></i> "Drukuj" / "Print" button in the top panel.
-    *   **Export to TXT:** Click <i class="fas fa-file-alt"></i> "Eksportuj do TXT" / "Export to TXT".
-    *   **Export to HTML:** Click <i class="fas fa-file-code"></i> "Eksportuj do HTML" / "Export to HTML".
+    *   **Print:** Click the <i class="fas fa-print"></i> "Print" button in the top panel.
+    *   **Export to TXT:** Click <i class="fas fa-file-alt"></i> "Export to TXT".
+    *   **Export to HTML:** Click <i class="fas fa-file-code"></i> "Export to HTML".
 
 ## Privacy and Security
 
