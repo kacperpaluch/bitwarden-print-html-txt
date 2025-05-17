@@ -54,7 +54,7 @@ Please choose the file corresponding to your preferred language.
 4.  **Filter and Select Items:**
     *   On the left side, lists of folders and item types will appear. Select those you are interested in.
     *   On the right side (in the middle column in the desktop version), a list of items matching the filters will be displayed. Select the specific items you want to print or export.
-    *   Selected items will appear in the "Podgląd wydruku" / "Print Preview" section.
+    *   Selected items will appear in the "Print Preview" section.
 
 5.  **Adjust Print Settings (Optional):**
     *   Click the <i class="fas fa-cog"></i> "Print Settings" icon below the preview header.
