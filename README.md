@@ -44,8 +44,8 @@ Please choose the file corresponding to your preferred language.
     *   Select the `json` file format (not `.json (encrypted)`).
     *   Enter your master password to confirm the export and download the file.
 
-2.  **Open `print_bitwarden.html`:**
-    *   Download the `print_bitwarden.html` file from this repository.
+2.  **Open `bitwarden_print_html_txt.html`:**
+    *   Download the `bitwarden_print_html_txt.html` file from this repository.
     *   Open it in your preferred web browser (e.g., Chrome, Firefox, Edge, Safari).
 
 3.  **Load the JSON File:**
