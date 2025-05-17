@@ -27,7 +27,7 @@ A tool for viewing, filtering, and printing JSON exports from the Bitwarden pass
     *   Operates **entirely client-side** (in your browser).
     *   No data from your export is **sent to any server**.
     *   The code is fully open-source and available for audit.
-*   **User Interface:** Simple and intuitive interface (currently in Polish, but the tool is usable internationally).
+*   **User Interface:** Simple and intuitive interface.
 
 ## Available File Language Versions
 
