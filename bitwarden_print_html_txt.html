@@ -512,22 +512,22 @@
         <div class="file-upload-container">
           <div class="file-upload" id="dropZone">
             <i class="fas fa-cloud-upload-alt"></i>
-            <div class="file-upload-text">Drag and drop a JSON file or use the button below</div>
+            <div class="file-upload-text">Drag and drop JSON file or use the button below</div>
             <div class="file-name" id="fileName"></div>
           </div>
           <button id="uploadButton" class="btn" style="width: 100%; margin-top: 10px;">
-          <i class="fas fa-file-upload"></i> Select JSON file
+            <i class="fas fa-file-upload"></i> Choose JSON file
           </button>
           <input type="file" id="fileInput" accept="application/json" style="display: none;" />
         </div>
         
         <div id="folderCard" class="card" style="display: none;">
-          <h2><i class="fas fa-folder"></i> Folders</h2>
+          <h2><i class="fas fa-folder"></i> Foldery</h2>
           <div class="folder-list">
             <div class="folder-list-inner" id="folderList">
               <div class="empty-state">
                 <i class="fas fa-folder-open"></i>
-                <p>Load JSON file to display folders</p>
+                <p>Upload JSON file to display folders</p>
               </div>
             </div>
           </div>
@@ -535,7 +535,7 @@
         
         <!-- Typy elementów: filtrera wyboru typu (login, karta, tożsamość, notatka, SSH) -->
         <div id="typeCard" class="card" style="display: none;">
-          <h2><i class="fas fa-filter"></i> Item Types</h2>
+        <h2><i class="fas fa-filter"></i> Item Types</h2>
           <div class="folder-list" id="typeList">
             <div class="checkbox-item">
               <input type="checkbox" id="type_login" value="login" checked />
@@ -578,23 +578,28 @@
             <label for="pageBreakToggle"></label>
             <span>Print each item on a separate page</span>
           </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="historyToggle" checked />
+            <label for="historyToggle"></label>
+            <span>Include password history</span>
+          </div>
         </div>
       </div>
       
       <div id="printContent">
         <div class="empty-state">
           <i class="fas fa-file-alt"></i>
-          <p>Load JSON file and select items to see print preview</p>
+          <p>Upload JSON file and select items to see print preview</p>
         </div>
       </div>
     </div>
   <div class="sidebar">
     <div id="itemCard" class="card" style="display: none;">
-      <h2><i class="fas fa-key"></i> Elementy</h2>
+      <h2><i class="fas fa-key"></i> Items</h2>
       <div id="itemList">
         <div class="empty-state">
           <i class="fas fa-list"></i>
-          <p>Select a folder to view items</p>
+          <p>Select a folder to display items</p>
         </div>
       </div>
     </div>
@@ -627,12 +632,12 @@
     const itemList = document.getElementById('itemList');
     const printContent = document.getElementById('printContent');
     const pageBreakToggle = document.getElementById('pageBreakToggle');
+    const historyToggle = document.getElementById('historyToggle');
     const printBtn = document.getElementById('printBtn');
     const exportTxtBtn = document.getElementById('exportTxtBtn');
     const exportHtmlBtn = document.getElementById('exportHtmlBtn');
     const settingsToggle = document.getElementById('settingsToggle');
     const printSettings = document.getElementById('printSettings');
-    printSettings.style.display = 'none';
     const typeCard = document.getElementById('typeCard');
     const typeList = document.getElementById('typeList');
     types.forEach(type => {
@@ -682,11 +687,13 @@
     
     // Other event listeners
     pageBreakToggle.addEventListener('change', renderPrintPreview);
+    historyToggle.addEventListener('change', renderPrintPreview);
     printBtn.addEventListener('click', () => window.print());
     exportTxtBtn.addEventListener('click', exportToTxt);
     exportHtmlBtn.addEventListener('click', exportToHtml);
     settingsToggle.addEventListener('click', () => {
-      printSettings.style.display = printSettings.style.display === 'none' ? 'block' : 'none';
+      const isHidden = window.getComputedStyle(printSettings).display === 'none';
+      printSettings.style.display = isHidden ? 'block' : 'none';
     });
     
     // Handle file upload
@@ -708,7 +715,7 @@
       document.querySelector('.file-upload-text').textContent = 'File loaded! Click to change';
       
       // Add loading state
-      folderList.innerHTML = '<div class="empty-state loading"><i class="fas fa-spinner"></i><p>Loading data...</p></div>';
+      folderList.innerHTML = '<div class="empty-state loading"><i class="fas fa-spinner"></i><p>Wczytywanie danych...</p></div>';
       folderCard.style.display = 'block';
       typeCard.style.display = 'block';
       
@@ -882,7 +889,7 @@
       });
       
       if (filteredItems.length === 0) {
-        itemList.innerHTML = '<div class="empty-state"><i class="fas fa-filter"></i><p>Select a folder to view items</p></div>';
+        itemList.innerHTML = '<div class="empty-state"><i class="fas fa-filter"></i><p>Select a folder to display items</p></div>';
         return;
       }
 
@@ -908,7 +915,7 @@
         
         label.appendChild(checkbox);
         
-        const nameText = document.createTextNode(item.name || '(no name)');
+        const nameText = document.createTextNode(item.name || '(bez nazwy)');
         label.appendChild(nameText);
         
         container.appendChild(label);
@@ -958,11 +965,12 @@
       printContent.innerHTML = '';
       
       if (!data) {
-        printContent.innerHTML = '<div class="empty-state"><i class="fas fa-file-alt"></i><p>Load JSON file to see preview</p></div>';
+        printContent.innerHTML = '<div class="empty-state"><i class="fas fa-file-alt"></i><p>Upload JSON file to see preview</p></div>';
         return;
       }
       
       const usePageBreak = pageBreakToggle.checked;
+      const showHistory = historyToggle.checked;
       const selectedItemsArr = data.items.filter(i => itemsSelected.has(i.id) && typesSelected.has(getItemType(i)));
       
       if (selectedItemsArr.length === 0) {
@@ -979,7 +987,7 @@
         
         // Title
         const title = document.createElement('h3');
-        title.textContent = item.name || '(no name)';
+        title.textContent = item.name || '(bez nazwy)';
         container.appendChild(title);
         
         // Folder info
@@ -1167,7 +1175,7 @@
             uriTitle.className = 'section-title';
             uriTitle.style.fontSize = '14px';
             uriTitle.style.marginTop = '15px';
-            uriTitle.innerHTML = '<i class="fas fa-link"></i> URLs';
+            uriTitle.innerHTML = '<i class="fas fa-link"></i> Website URLs';
             loginDiv.appendChild(uriTitle);
             
             const ul = document.createElement('ul');
@@ -1186,6 +1194,25 @@
             loginDiv.appendChild(ul);
           }
           
+          // Password history
+          if (showHistory && item.passwordHistory && item.passwordHistory.length) {
+            const historyTitle = document.createElement('div');
+            historyTitle.className = 'section-title';
+            historyTitle.innerHTML = '<i class="fas fa-history"></i> Password History';
+            loginDiv.appendChild(historyTitle);
+            const historyContainer = document.createElement('div');
+            historyContainer.className = 'additional-fields';
+            const historyUl = document.createElement('ul');
+            item.passwordHistory.forEach(h => {
+              const li = document.createElement('li');
+              const date = new Date(h.lastUsedDate).toLocaleString();
+              li.innerHTML = '<span class="field-label">' + date + ':</span> <span class="field-value">' + h.password + '</span>';
+              historyUl.appendChild(li);
+            });
+            historyContainer.appendChild(historyUl);
+            loginDiv.appendChild(historyContainer);
+          }
+
           container.appendChild(loginDiv);
         }
         // Card
@@ -1363,9 +1390,16 @@
           if (item.login.password) lines.push('Password: ' + item.login.password);
           if (item.login.totp) lines.push('TOTP: ' + item.login.totp);
           if (item.login.uris) {
-            lines.push('URLs:');
+            lines.push('Website URLs:');
             item.login.uris.forEach(uriObj => {
               lines.push('  ' + uriObj.uri);
+            });
+          }
+          // Password history
+          if (historyToggle.checked && item.passwordHistory && item.passwordHistory.length) {
+            lines.push('-- Password History --');
+            item.passwordHistory.forEach(h => {
+              lines.push('  ' + h.lastUsedDate + ': ' + escapeNewlines(h.password));
             });
           }
         } else if (item.card) {
@@ -1393,7 +1427,7 @@
     // Export to TXT
     function exportToTxt() {
       if (!data) {
-        alert('No data loaded for export.');
+      alert('No data loaded for export.');
         return;
       }
       const selectedItemsArr = data.items.filter(i => itemsSelected.has(i.id) && typesSelected.has(getItemType(i)));
@@ -1423,6 +1457,7 @@
         return;
       }
       const selectedItemsArr = data.items.filter(i => itemsSelected.has(i.id) && typesSelected.has(getItemType(i)));
+      const showHistory = historyToggle.checked;
       if (selectedItemsArr.length === 0) {
         alert('Select at least one item to export.');
         return;
@@ -1489,12 +1524,21 @@
             }
           }
           if (item.login.uris && item.login.uris.length) {
-            htmlParts.push('<div class="section-title" style="font-size: 14px; margin-top: 15px;">URLs</div>');
+            htmlParts.push('<div class="section-title" style="font-size: 14px; margin-top: 15px;">Website URLs</div>');
             htmlParts.push('<ul class="uri-list">');
             item.login.uris.forEach(uriObj => {
               htmlParts.push('<li><a href="' + uriObj.uri + '" target="_blank">' + uriObj.uri + '</a></li>');
             });
             htmlParts.push('</ul>');
+          }
+          // Password history
+          if (showHistory && item.passwordHistory && item.passwordHistory.length) {
+            htmlParts.push('<div class="section-title"><i class="fas fa-history"></i> Password History</div>');
+            htmlParts.push('<div class="additional-fields"><ul>');
+            item.passwordHistory.forEach(h => {
+              htmlParts.push('<li><span class="field-label">' + h.lastUsedDate + ':</span> <span class="field-value">' + h.password + '</span></li>');
+            });
+            htmlParts.push('</ul></div>');
           }
           htmlParts.push('</div>');
         } else if (item.card) {
@@ -1517,7 +1561,7 @@
         }
 
         if (item.notes) {
-        htmlParts.push('<div class="section-title">Notes</div>');
+          htmlParts.push('<div class="section-title">Notes</div>');
           htmlParts.push('<div class="notes">' + item.notes + '</div>');
         }
 
